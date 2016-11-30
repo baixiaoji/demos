@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+</head>
+<style>
+	body,html{
+		padding:0;
+		margin:0;
+	}
+	.wrap{
+		/*width:1000px;*/
+		width:78.125%;
+		position: relative;
+		margin:0 auto;
+	}
+	.wrap .item{
+		position: absolute;
+		/*float: left;*/
+		width:235px;
+		height:300px;
+		margin-right:15px;
+		margin-bottom:10px;
+		transition:all 0.3s;
+	}
+	.h1{
+		background: #000;
+	}
+	.h2{
+		background: orange;
+	}
+	.h3{
+		background: blue;
+	}
+	.h4{
+		background:green;
+	}
+	.h5{
+		background:yellow;
+	}
+</style>
+<body>
+	<div class="wrap">
+		<div class="item h1"></div>
+		<div class="item h2"></div>
+		<div class="item h3"></div>
+		<div class="item h4"></div>
+		<div class="item h5"></div>
+		<div class="item h1"></div>
+		<div class="item h2"></div>
+		<div class="item h3"></div>
+		<div class="item h4"></div>
+		<div class="item h5"></div>
+		<div class="item h1"></div>
+		<div class="item h2"></div>
+		<div class="item h3"></div>
+		<div class="item h4"></div>
+		<div class="item h5"></div>
+		<div class="item h1"></div>
+		<div class="item h2"></div>
+		<div class="item h3"></div>
+		<div class="item h4"></div>
+		<div class="item h5"></div>
+		<div class="item h1"></div>
+		<div class="item h2"></div>
+		<div class="item h3"></div>
+		<div class="item h4"></div>
+		<div class="item h5"></div>
+		<div class="item h1"></div>
+		<div class="item h2"></div>
+		<div class="item h3"></div>
+		<div class="item h4"></div>
+		<div class="item h5"></div>
+	</div>
+</body>
+<script src="jquery.min.js"></script>
+<script>
+	waterFull();
+	$(window).resize(function(){
+		waterFull();
+	});
+
+
+	/*
+		1. 计算
+		1.1 一行占用元素个数
+		（容器的宽度-元素的宽度）
+		2.保存每一列的高度
+		2.1 使用一个空数组来保存每列的高度
+		3. 遍历
+		3.1 元素摆放在最小元素的那一列
+
+	*/
+
+	// 函数
+	/*function waterFull(){
+		// 1
+		var ctWidth = $(".wrap").width();
+		var itemWidth = $(".item").outerWidth(true);
+		// 2
+		var col = Math.floor(ctWidth/itemWidth);
+		var hArr = [];
+		for(var i = 0; i<col;i++){
+			hArr.push(0)
+		}
+		// 3
+
+		$(".item").each(function(){
+			var $cur = $(this);
+			var idx = 0;
+			var minHeight = hArr[0];
+			for(var i = 0;i<hArr.length;i++){
+				if(minHeight>hArr[i]){
+					idx = i;
+					minHeight = hArr[i]
+				}
+			}
+
+			$cur.css({
+				"left":itemWidth*idx,
+				"top":minHeight
+			});
+
+			hArr[idx] = $cur.outerHeight(true) + hArr[idx];
+		});
+	}*/
+
+
+
+
+</script>
+</html>
