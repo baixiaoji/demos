@@ -76,10 +76,10 @@
 </body>
 <script src="jquery.min.js"></script>
 <script>
-	waterFull();
-	$(window).resize(function(){
-		waterFull();
-	});
+	// waterFull();
+	// $(window).resize(function(){
+	// 	waterFull();
+	// });
 
 
 	/*
@@ -125,9 +125,50 @@
 			hArr[idx] = $cur.outerHeight(true) + hArr[idx];
 		});
 	}*/
+	// 简单封装
+	var waterFull = (function(){
+		function init($ele){
+			var ctWidth = $ele.width(),
+			    itemWidth = $(".item").outerWidth(true),
+			    col = Math.floor(ctWidth/itemWidth);
+			
+			var itemHeightArr = [];
+			for(var i = 0; i<col;i++){
+				itemHeightArr.push(0);
+			}
+
+			$(".item").each(function(){
+				var $cur = $(this);
+				var idx = 0;
+				var minHeight = itemHeightArr[0];
+					
+				for(var i = 0; i<itemHeightArr.length;i++){
+					if(minHeight>itemHeightArr[i]){
+						idx  = i;
+						minHeight = itemHeightArr[i]
+					}
+				}
+
+				$cur.css({
+					"top":minHeight,
+					"left":itemWidth*idx
+				})
+
+				itemHeightArr[idx] = $cur.outerHeight(true) + itemHeightArr[idx];
+			});
 
 
 
+		}
+		return {
+			init:init
+		}
+	})()
+
+	waterFull.init($(".wrap"))
+	$(window).resize(function(){
+		waterFull.init($(".wrap"))
+	});
 
 </script>
 </html>
