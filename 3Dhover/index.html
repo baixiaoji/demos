@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <meta charset="utf-8">
+  <title>3D-Hover</title>
+</head>
+<style>
+  *{box-sizing:border-box}
+  #test{
+    width:100%;
+    height:500px;
+    margin:100px 0;  
+    padding:100px 0;
+    background: #fff;  
+    perspective:1000px;
+    border:1px solid;  
+  }
+  #banner{
+    width:400px;
+    height:300px;
+    margin:0 auto;
+    line-height:300px;
+    text-align: center;
+    background:#37D7B2;
+    font-size: 60px;
+    color:#fff;
+    font-weight: bold;
+    transition:transform 0.1s;
+    box-shadow:0 0 15px rgba(0,0,0,0.25);
+    cursor:pointer;
+  }
+</style>
+<body>
+<div id="test">
+  <div id="banner">Banner</div>
+</div>
+</body>
+  <script>
+    $("#test").on("mousemove",function(e){
+      //所有关于事件的差数都在e里
+      var offset = $("#test").offset();
+      // 明白 clientX/Y pageX/Y offsetX/Y screenX/Y 之间的区别
+      var x = e.pageX - offset.left;
+      var y = e.pageY - offset.top;
+
+      var centerX = $("#test").outerWidth()/2;      
+      var centerY = $("#test").outerHeight()/2;
+
+      var deltaX = x - centerX;      
+      var deltaY = y - centerY;
+      
+      var percentX = deltaX/centerX;     
+      var percentY = deltaY/centerY;
+    
+      var deg = 20;
+
+      
+      $("#banner").css({
+        transform:'rotateX('+deg*-percentY+'deg)'+'rotateY('+deg*percentX+'deg)'
+      })
+    })
+  </script>
+
+</html>
