@@ -1,0 +1,564 @@
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  min-width: 800px;
+  font-family: Microsoft YaHei;
+}
+nav,
+ul,
+li,
+a,
+h2,
+h1,
+p,
+footer,
+header {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+body {
+  background-size: 100% 100%;
+  position: relative;
+}
+.mask {
+  width: 100%;
+  height: 10%;
+  background: #FFCC00;
+  position: absolute;
+  z-index: 999;
+  display: none;
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: none;
+}
+.bg {
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  transition: all 400ms ease-in;
+  z-index: -1;
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -1px;
+  margin-top: -1px;
+  opacity: 0.1;
+}
+.warTop {
+  width: 100%;
+  height: 88%;
+  overflow: hidden;
+}
+header {
+  width: 88%;
+  margin: 0 auto;
+  height: 70px;
+  padding: 10px 6% 0;
+  z-index: 2;
+}
+.logo {
+  width: 110px;
+  height: 70px;
+  float: left;
+}
+.logo img {
+  width: auto;
+  height: 60%;
+}
+nav {
+  width: 600px;
+  height: 70px;
+  float: right;
+  padding-left: 20px;
+}
+.nav {
+  width: 280px;
+  height: 55px;
+  float: right;
+  text-align: right;
+}
+.nav li {
+  width: auto;
+  height: 55px;
+  line-height: 55px;
+  margin-right: 10px;
+  float: left;
+}
+.nav a {
+  display: block;
+  width: auto;
+  height: 55px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+.search {
+  float: right;
+  width: 31px;
+  height: 45px;
+  padding-top: 10px;
+  line-height: 55px;
+  position: relative;
+  overflow: hidden;
+}
+.serbtn {
+  position: absolute;
+  top: 10px;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: url(../img/search.png) no-repeat;
+  cursor: pointer;
+}
+.login {
+  float: right;
+  width: 75px;
+  height: 55px;
+  margin-left: 15px;
+  line-height: 55px;
+  background: url(../img/login.png) no-repeat center center;
+  text-align: center;
+  cursor: pointer;
+}
+.content {
+  width: 92%;
+  padding: 0 4%;
+  margin: 0 auto;
+  height: 85%;
+}
+.content:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.box {
+  width: 50%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+}
+.left {
+  width: 92%;
+  height: 92%;
+  padding-left: 8%;
+  padding-top: 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.text {
+  margin-bottom: 10%;
+}
+.one {
+  animation: downp 1s ease-in 1;
+}
+@keyframes downh {
+  0% {
+    opacity: 0;
+    margin-top: 55px;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 10px;
+  }
+}
+@-moz-keyframes downh {
+  0% {
+    opacity: 0;
+    margin-top: 55px;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 10px;
+  }
+}
+@-webkit-keyframes downh {
+  0% {
+    opacity: 0;
+    margin-top: 55px;
+  }
+  20% {
+    opacity: 0;
+    margin-top: 45px;
+  }
+  40% {
+    opacity: 0.5;
+    margin-top: 45px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 10px;
+  }
+}
+/*****p动画********/
+@keyframes downp {
+  0% {
+    opacity: 0;
+    margin-top: 55px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 35px;
+  }
+  50% {
+    opacity: 0;
+    margin-top: 25px;
+  }
+  55% {
+    opacity: 0;
+    margin-top: 23px;
+  }
+  60% {
+    opacity: 0.4;
+    margin-top: 20px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+@-moz-keyframes downp {
+  0% {
+    opacity: 0;
+    margin-top: 55px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 35px;
+  }
+  50% {
+    opacity: 0;
+    margin-top: 25px;
+  }
+  55% {
+    opacity: 0;
+    margin-top: 23px;
+  }
+  60% {
+    opacity: 0.4;
+    margin-top: 20px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+@-webkit-keyframes downp {
+  0% {
+    opacity: 0;
+    margin-top: 55px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 45px;
+  }
+  45% {
+    opacity: 0;
+    margin-top: 35px;
+  }
+  50% {
+    opacity: 0;
+    margin-top: 25px;
+  }
+  55% {
+    opacity: 0;
+    margin-top: 23px;
+  }
+  60% {
+    opacity: 0.1;
+    margin-top: 21px;
+  }
+  65% {
+    opacity: 0.5;
+    margin-top: 18px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+.text h1 {
+  color: #fff;
+  margin: 10px 0;
+  text-shadow: 1px 1px rgba(51, 51, 51, 0.2);
+  -moz-animation: downh 1s ease-in 1;
+  -webkit-animation: downh 1s ease-in 1;
+  animation: downh 1s ease-in 1;
+}
+.text p {
+  color: #fff;
+  font-size: 1em;
+  margin: 3px 0;
+}
+.gamepic {
+  width: 100%;
+  height: 30%;
+}
+.touch {
+  width: 52px;
+  height: 35px;
+  background: transparent;
+  position: absolute;
+  margin-top: -38px;
+  margin-left: 46px;
+}
+.touch a {
+  display: block;
+  width: 70px;
+  height: 35px;
+}
+/*******动画图片**********/
+.gamepic {
+  -moz-animation: up 800ms ease-in 1;
+  -webkit-animation: up 800ms ease-in 1;
+  animation: up 800ms ease-in 1;
+}
+/*******gamepic移动********/
+@keyframes up {
+  0% {
+    opacity: 0;
+    margin-top: 90px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 40px;
+  }
+  50% {
+    opacity: 0.5;
+    margin-top: 35px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+@-moz-keyframes up {
+  0% {
+    opacity: 0;
+    margin-top: 90px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 40px;
+  }
+  50% {
+    opacity: 0.2;
+    margin-top: 35px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+@-webkit-keyframes up {
+  0% {
+    opacity: 0;
+    margin-top: 90px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 40px;
+  }
+  50% {
+    opacity: 0.2;
+    margin-top: 30px;
+  }
+  70% {
+    opacity: 0.6;
+    margin-top: 27px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+.gamepic img {
+  width: 70%;
+  height: auto;
+}
+.right {
+  width: 90%;
+  height: 92%;
+  padding-top: 8%;
+  padding-left: 5%;
+  -moz-animation: right 1500ms Linear 1;
+  -webkit-animation: right 1500ms Linear 1;
+  animation: right 1500ms Linear 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*****人物图片*******/
+@-moz-keyframes right {
+  0% {
+    padding-left: 20%;
+    opacity: 0;
+  }
+  40% {
+    padding-left: 15%;
+    opacity: 0;
+  }
+  50% {
+    padding-left: 10%;
+    opacity: 0.5;
+  }
+  80% {
+    padding-left: 7%;
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes right {
+  0% {
+    padding-left: 20%;
+    opacity: 0;
+  }
+  40% {
+    padding-left: 15%;
+    opacity: 0;
+  }
+  50% {
+    padding-left: 10%;
+    opacity: 0.5;
+  }
+  80% {
+    padding-left: 7%;
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes right {
+  0% {
+    padding-left: 20%;
+    opacity: 0;
+  }
+  40% {
+    padding-left: 15%;
+    opacity: 0;
+  }
+  50% {
+    padding-left: 10%;
+    opacity: 0.5;
+  }
+  80% {
+    padding-left: 7%;
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.right img {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+}
+.warBot {
+  width: 100%;
+  height: 12%;
+  background: #fff;
+  position: relative;
+}
+footer {
+  width: 84%;
+  height: 99%;
+  padding: 1% 8% 0;
+  margin: 0 auto;
+}
+.fin {
+  text-align: center;
+}
+.radio {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  background: url(../img/radio.png) no-repeat center center;
+  background-size: 80%;
+}
+.red {
+  color: red;
+}
+.ball {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  position: absolute;
+  right: 4%;
+  top: -42px;
+  overflow: hidden;
+  display: none;
+}
+.warpic {
+  position: absolute;
+  height: 252px;
+  font-size: 0;
+  cursor: pointer;
+}
+.img {
+  width: 100%;
+  height: 100%;
+}
+.fly {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.center {
+  width: 50px;
+  left: 50px;
+  border-radius: 50%;
+  background: #333;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+}
+@media screen and (max-width: 1024px) {
+  body {
+    min-width: 900px;
+  }
+}
+@media screen and (max-width: 1366px) {
+  body {
+    min-width: 960px;
+  }
+  .gamepic {
+    margin-top: 5%;
+    -moz-animation: up 2s ease-in 1;
+    -webkit-animation: up 2s ease-in 1;
+    animation: up 2s ease-in 1;
+  }
+}
+@media screen and (max-height: 900px) {
+  body {
+    min-height: 619px;
+  }
+}
