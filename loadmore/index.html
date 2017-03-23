@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>
+      加载更多
+    </title>
+    <style>
+      ul,li{
+      margin: 0;
+      padding: 0
+    }
+    #ct li{
+      list-style:none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      cursor:pointer;
+    }
+    #load-more{
+      display: block;
+      margin: 10px auto;
+      text-align: center;
+      cursor: pointer;
+    }
+    #load-more img{
+      width: 40px;
+      height: 40px;
+    }
+    .btn{
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      width: 80px;
+      border: 1px solid #E27272;
+      border-radius: 3px;
+      text-align: center;
+      text-decoration: none;
+      color: #E27272;
+    }
+    .btn:hover{
+      background: green;
+      color: #fff;
+    }
+      </style>
+  </head>
+  <body>
+    <ul id="ct">
+    </ul>
+    <a id="load-more" class="btn" href="#">
+      加载更多
+    </a>
+  </body>
+
+  <script>
+  /*定义接口
+
+  1) url:
+  2) 入参: { start: 2, len: 6 }
+  3) 回参: 
+  {
+  status: 1, //1代表正常，0代表出错
+  data: [2,3,4,5,6,7]
+  }
+  */
+  var btn = document.querySelector("#load-more")
+  var ct = document.querySelector("#ct")
+  var pageIndex = 0;
+  var isDataArrive = false;   // status lock
+
+
+  btn.addEventListener("click",function(e){
+    e.preventDefault();
+    if(isDataArrive){
+      return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState ===4 ){
+          if(xhr.status === 200 || xhr.status === 304){
+           var results = JSON.parse( xhr.responseText)
+           
+           var fragment = document.createDocumentFragment();
+           for (var i =0 ; i< results.length; i++) {
+             var node = document.createElement("li")
+             node.innerText = results[i]
+             fragment.appendChild(node)
+           };
+           ct.appendChild(fragment)
+           pageIndex = pageIndex + 5;
+         }
+      }
+      isDataArrive = false;
+    }
+    xhr.open("GET",'/loadMore?index='+pageIndex+'&length=5', true);
+    xhr.send()
+
+    isDataArrive = true;
+  })
+    </script>
+</html>
