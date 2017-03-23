@@ -75,28 +75,71 @@
     if(isDataArrive){
       return;
     }
+
+    loadData(function(news){
+      renderData(news)
+
+      pageIndex = pageIndex + 5;
+      isDataArrive = false;
+    })
+    
+    
+    isDataArrive = true;
+
+  })
+
+
+  function loadData(callback){
+    ajax({
+      type: "get",
+      url:"/loadMore",
+      data:{
+        index:pageIndex,
+        length:5
+      },
+      onSuccess:callback,
+      onError:function(){
+        console.log("error")
+      }
+    })
+  }
+
+
+  function renderData(news){
+     var fragment = document.createDocumentFragment();
+     for (var i =0 ; i< news.length; i++) {
+       var node = document.createElement("li")
+       node.innerText = news[i]
+       fragment.appendChild(node)
+     };
+     ct.appendChild(fragment)
+  }
+
+
+
+  function ajax(options){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
       if(xhr.readyState ===4 ){
           if(xhr.status === 200 || xhr.status === 304){
            var results = JSON.parse( xhr.responseText)
            
-           var fragment = document.createDocumentFragment();
-           for (var i =0 ; i< results.length; i++) {
-             var node = document.createElement("li")
-             node.innerText = results[i]
-             fragment.appendChild(node)
-           };
-           ct.appendChild(fragment)
-           pageIndex = pageIndex + 5;
+           options.onSuccess(results)
+           
          }
       }
-      isDataArrive = false;
+     
     }
-    xhr.open("GET",'/loadMore?index='+pageIndex+'&length=5', true);
-    xhr.send()
 
-    isDataArrive = true;
-  })
+    var query = "?"
+
+    for(key in options.data){
+      query += key+"="+options.data[key]+"&"
+    }
+
+    query = query.substr(0,query.length-1)    
+    xhr.open(options.type,options.url+query, true);
+    xhr.send()
+  }
     </script>
 </html>
