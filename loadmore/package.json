@@ -1,0 +1,19 @@
+{
+  "name": "ajax",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "server-mock": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "server start"
+  },
+  "keywords": [
+    "node",
+    "ajax"
+  ],
+  "author": "baixiaoji",
+  "license": "ISC"
+}
