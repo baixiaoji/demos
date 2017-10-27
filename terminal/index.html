@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Terminal的测试</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: #000;
+    }
+</style>
+
+<body>
+
+</body>
+<script src="./js/terminal.js"></script>
+<script>
+    let name = ''
+    var myTerminal = new Terminal("stuip")
+    myTerminal.setHeight("800px")
+    myTerminal.setWidth("600px")
+    // myTerminal.blinkingCursor(false)
+    document.body.appendChild(myTerminal.html)
+
+    myTerminal.print("Hi,stupid man😊")
+    myTerminal.input("what's your name?", (firstName) => {
+        myTerminal.print("Weclome," + firstName + "!")
+        name = firstName
+        stupid()
+    })
+    // myTerminal.beep()
+    // myTerminal.confirm("are you sure?",(val)=>{
+    //     console.log(val)
+    // })
+    
+    function stupid() {
+        myTerminal.input("Would you like to story I will say (yes or no)?", (val) => {
+            reply(val)
+        })
+    }
+    function reply(value) {
+        console.log(value)
+        switch (value.toLowerCase()) {
+            case "no":
+                myTerminal.clear()
+                myTerminal.beep()
+                myTerminal.print("hearing my scream!")
+                myTerminal.print("please! give me a chance!")
+                stupid()
+                break;
+            default:
+                story()
+                break;
+        }
+    }
+    function story() {
+        myTerminal.sleep(10, () => {
+            myTerminal.clear()
+            myTerminal.print("long long ago ~")
+        })
+        myTerminal.sleep(1500, () => {
+                myTerminal.print("there is a boy who named Tom ~")
+        })
+        myTerminal.sleep(2550, () => {
+                myTerminal.print("having a good friend who name the "+name)
+        })
+        myTerminal.sleep(3000,()=>[
+            myTerminal.print("Tom is bad guy and often beat the "+name)
+        ])
+        myTerminal.sleep(5000,()=>{
+            myTerminal.print("and say, and say, and say.....")
+        })
+        myTerminal.sleep(7000,()=>{
+            myTerminal.print(name+", you are stupid!")
+            myTerminal.input("it's a nice story (yes or no) ?",function(){
+                myTerminal.print("Opps！you are fooled,having a nice day!😊")
+            })
+        })
+    }
+</script>
+
+</html>
