@@ -9,7 +9,7 @@ global.require2 = function require2(path){
     };
     const code = fs.readFileSync(path).toString();
     const functionCode = new Function('module, exports', code);
-    
+    // 提早添加，让循环依赖早点cache住
     require2.cache[path] = module;
     functionCode(module, module.exports);
     return module.exports;
