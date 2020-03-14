@@ -1,0 +1,1 @@
+exports.baz = 'this is a file baz';
