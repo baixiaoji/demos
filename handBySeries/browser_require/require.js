@@ -1,16 +1,24 @@
 
 function get(path) {
-    const xhr = new XMLHttpRequest()
-    xhr.open('GET', path, false);
-    xhr.send();
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', path);
+        xhr.onload = () => {
+            resolve(xhr.responseText);
+        }
 
-    return xhr.responseText;
+        xhr.onerror = () => {
+            reject()
+        }
+        xhr.send();
+    })
+    
 }
 function require(path) {
     if (require.cache[path]) {
         return require.cache[path].exports;
     }
-    const code = get(path);
+    const code = require.codeCache[path]
 
     const codeFunction = new Function('module,exports', code)
 
@@ -25,3 +33,22 @@ function require(path) {
 }
 
 require.cache = {}
+require.codeCache = {}
+require.start = (path) => {
+    load(path).then(() => {
+        require(path);
+    })
+}
+
+async function load(path) {
+    const code  = await get(path);
+    
+    require.codeCache[path] = code;
+    
+    const matchDeps = code.match(/require\(\'(.*?)\'\)/g)
+    if (matchDeps) {
+        const deps = matchDeps.map(str => str.match(/require\(\'(.*?)\'\)/)[1]);
+        await Promise.all(deps.map(load))
+    }
+    return
+}
