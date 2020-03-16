@@ -10,7 +10,7 @@ const currify = (
 }
 
 
-// sprit by compostion softwave
+// inspired by compostion softwave
 const currify2 = (
     fn, 
     arr = []
