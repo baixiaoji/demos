@@ -1,11 +1,14 @@
-function _bind(asThis, ...arg) {
+const slice = String.prototype.slice;
+function _bind(asThis) {
   const fn = this;
+  const args = slice.call(arguments, 1);
   if (typeof fn !== 'function') {
-    throw TypeError('bind should call by function');
+    return TypeError('必须有函数调用');
   }
-  const newFn = function(...args) {
-    return fn.call(this instanceof newFn ? this : asThis, ...arg, ...args);
-  };
+  const newFn = function () {
+    const otherArgs = slice.call(arguments);
+    return fn.call(this instanceof newFn ? this : asThis, args.concat(otherArgs));
+  }
   newFn.prototype = fn.prototype;
   return newFn;
 }
