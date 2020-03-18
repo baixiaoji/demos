@@ -5,16 +5,17 @@ function debounce(fn, wait, immediate) {
     return function () {
         const result = undefined;
         const self = this;
+        const args = arguments;
         if (timer) clearTimeout(timer);
         if (immediate) {
             const canInvoke = !timer;
             timer = setTimeout(() => {
                 timer = null;
             }, wait)
-            if (canInvoke) result = fn.apply(self, arguments);
+            if (canInvoke) result = fn.apply(self, args);
         } else {
             timer = setTimeout(() => {
-                fn.apply(self, arguments);
+                fn.apply(self, args);
             }, wait)
         }
         return result;
