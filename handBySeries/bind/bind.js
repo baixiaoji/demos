@@ -1,17 +1,17 @@
-const slice = String.prototype.slice;
-function _bind(asThis) {
+
+function _bind(asThis, ...args) {
   const fn = this;
-  const args = slice.call(arguments, 1);
   if (typeof fn !== 'function') {
-    return TypeError('必须有函数调用');
+    return TypeError('必须用函数调用')
   }
-  const newFn = function () {
-    const otherArgs = slice.call(arguments);
-    return fn.call(this instanceof newFn ? this : asThis, args.concat(otherArgs));
+  const newFn = function(...params) {
+    return fn.apply(this instanceof newFn ? this : asThis, args.concat(params));
   }
+  // 需要调整原型
   newFn.prototype = fn.prototype;
   return newFn;
 }
 
 Function.prototype._bind = _bind;
+
 module.exports = _bind;
