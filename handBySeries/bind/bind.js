@@ -1,17 +1,19 @@
+const slice = Array.prototype.slice;
 
-function _bind(asThis, ...args) {
+function _bind(asThis) {
   const fn = this;
   if (typeof fn !== 'function') {
-    return TypeError('必须用函数调用')
+    return Error('must need function type to call')
   }
-  const newFn = function(...params) {
-    return fn.apply(this instanceof newFn ? this : asThis, args.concat(params));
+  const args = slice.apply(arguments, 1);
+  const newFn = function () {  
+    return fn.apply(this instanceof newFn ? this : asThis, args.concat(slice.apply(arguments)));
   }
-  // 需要调整原型
+  
   newFn.prototype = fn.prototype;
+  
   return newFn;
 }
 
 Function.prototype._bind = _bind;
-
 module.exports = _bind;
