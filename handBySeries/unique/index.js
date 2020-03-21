@@ -4,13 +4,12 @@ function unique(array, isSort) {
     const arr = []
     
     if (isSort) {
-        const sortArr = array.concat().sort();
         let first = ''
-        for(let i = 0; i < sortArr.length; i++) {
+        for(let i = 0; i < array.length; i++) {
             if (!i || first !== sortArr[i]) {
-                arr.push(sortArr[i]);
+                arr.push(array[i]);
             }
-            first = sortArr[i];
+            first = array[i];
         }
     }else {
         array.forEach(element => {
@@ -26,4 +25,4 @@ function unique(array, isSort) {
 }
 
 console.log(unique(array));
-console.log(unique(array, true));
+console.log(unique(array.sort(), true));
