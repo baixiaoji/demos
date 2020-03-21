@@ -1,23 +1,24 @@
 // debounce 防抖 一段时间之后才会执行，若期间发生同样事件，会重置计算时间
 // 明确函数体，知道入参是什么  和 输出是什么
 function debounce(fn, wait, immediate) {
-    const timer = null;
-    return function () {
-        const result = undefined;
-
-        const args = arguments;
+    let timer = null;
+    let result = undefined;
+    return function() {
         if (timer) clearTimeout(timer);
+
         if (immediate) {
-            const canInvoke = !timer;
+            let canCall = !timer;
             timer = setTimeout(() => {
                 timer = null;
             }, wait)
-            if (canInvoke) result = fn.apply(this, args);
+            if (canCall) result = fn.apply(this, arguments);
         } else {
+            
             timer = setTimeout(() => {
-                fn.apply(this, args);
+                fn.apply(this, arguments);
             }, wait)
         }
         return result;
+
     }
 }
