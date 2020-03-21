@@ -1,54 +1,56 @@
-
+// /require\(\'(.*?)\'\)/g
 function get(path) {
     return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest()
-        xhr.open('GET', path);
-        xhr.onload = () => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", path)
+        xhr.onload = function () {
             resolve(xhr.responseText);
         }
-
-        xhr.onerror = () => {
+        xhr.onerror = function () {
             reject()
         }
         xhr.send();
-    })
-    
+    }) 
 }
 function require(path) {
     if (require.cache[path]) {
-        return require.cache[path].exports;
+        return require.cache[path].module;
     }
-    const code = require.codeCache[path]
 
-    const codeFunction = new Function('module,exports', code)
+    const code  = require.codeCache[path];
+
+    const newFunction = new Function('module,exports', code);
 
     const module = {
         exports: {}
     }
 
     require.cache[path] = module;
-    codeFunction(module, module.exports);
+    newFunction(module, module.exports);
 
     return module.exports;
 }
 
 require.cache = {}
 require.codeCache = {}
+
 require.start = (path) => {
     load(path).then(() => {
-        require(path);
+        require(path)
     })
 }
 
-async function load(path) {
-    const code  = await get(path);
-    
-    require.codeCache[path] = code;
-    
-    const matchDeps = code.match(/require\(\'(.*?)\'\)/g)
-    if (matchDeps) {
-        const deps = matchDeps.map(str => str.match(/require\(\'(.*?)\'\)/)[1]);
-        await Promise.all(deps.map(load))
-    }
-    return
+function load(path) {
+    return get(path).then(code => {
+        require.codeCache[path] = code;
+
+        const match = code.match(/require\(\'(.*?)\'\)/g)
+
+        if (match) {
+            const dep = match.map(item => item.match(/require\(\'(.*?)\'\)/)[1]);
+            debugger;
+            return Promise.all(dep.map(load))
+        }
+    })
 }
