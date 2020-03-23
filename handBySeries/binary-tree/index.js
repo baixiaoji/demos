@@ -36,3 +36,45 @@ function preOrderSearch(root, cb = console.log) {
     }
 }
 preOrderSearch(root);
+
+
+function midOrderReverse(root, fn) {
+    let current = root;
+    const stack = [];
+
+    while (true) {
+        while (current) {
+            stack.push(current);
+            current  = current.left;
+        }
+        if (stack.length > 0) {
+            current = stack.pop();
+            fn(current.val);
+            current = current.right;
+            continue;
+        } else {
+            break;
+        }
+    }   
+}
+
+
+function preOrderReverse(root, fn) {
+    let current = root;
+    const stack = [];
+
+    while (true) {
+        while (current) {
+            fn(current.val);
+            stack.push(current);
+            current  = current.left;
+        }
+        if (stack.length > 0) {
+            current = stack.pop();
+            current = current.right;
+            continue;
+        } else {
+            break;
+        }
+    }   
+}
