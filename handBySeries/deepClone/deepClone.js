@@ -21,6 +21,8 @@ const b = deepClone(a);
 b[1].b = 'b';
 console.log(a);
 console.log(b);
+console.log(a[0] !== b[0]);
+
 
 
 
