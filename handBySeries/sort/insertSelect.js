@@ -16,14 +16,19 @@
 
 function insertionSort(array) {
     const {length} = array;
-
+    // 循环当前数组，记得边界值，
+    // 起始位置为 1 ，默认第一位已经排序好
     for (let i = 1; i < length; i++) {
         let j = i;
+        // 选出当前这张卡牌
         let temp = array[j];
+        // 选出来的卡牌与左边部分进行比较
+        // 边界值 最小为 0 && 卡牌 和 前一项 进行比较
         while(j > 0 && temp < array[j-1]) {
             array[j] = array[j -1];
             j--;            
         }
+        // 跳出循环那一刻，就能找到合适为之，然后将卡牌进行赋值
         array[j] = temp;
     }
     return array;
