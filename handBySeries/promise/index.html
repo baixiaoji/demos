@@ -10,9 +10,11 @@
     <script>
         
         new HD((resolve, rejecy) => {
-            resolve('success')
-        }).then(res => {
+            reject('success')
+        }).then().then(res => {
             console.log('first level'+ res);
+        }, res => {
+            console.log('first level error'+ res);
         })
         console.log('time');
         
