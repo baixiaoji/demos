@@ -1,4 +1,4 @@
-const _bind = require('./bind');
+const _bind = require('./_bind');
 
 function fn(a,b) {
   this.a = a;
