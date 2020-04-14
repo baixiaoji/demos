@@ -5,15 +5,17 @@ function swap(arr, i, j) {
 function _partition(arr) {
     // 随机找一个索引位置
     const poivtIndex = Math.floor(Math.random() * arr.length);
+    let poivt = arr[poivtIndex];
     // 索引位置和最后一个元素交换位置
     swap(arr, poivtIndex, arr.length - 1);
     
     let i = -1;
     let j = 0;
+    
     // 进行循环 当前的数组
     for(; j < arr.length - 1; j++)  {
         // 找到小于 标准值的数据
-        if (arr[j] < arr[poivtIndex]) {
+        if (arr[j] < poivt) {
             // 通过第二个指针  进行交换位置
             i++
             swap(arr, i, j);

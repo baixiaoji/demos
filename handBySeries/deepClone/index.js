@@ -1,6 +1,6 @@
 // recursion has performance problem
 function deepClone(obj) {
-    if (typeof obj !== 'object') return;
+    if (typeof obj !== 'object') return obj;
     const newObj = obj instanceof Array ? [] : {}
 
     for (const key in obj) {

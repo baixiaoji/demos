@@ -11,7 +11,7 @@ const array = [3,1,2,3,4,3,5,5,'1'];
 // }
 
 function unique(array) {
-    return array.filter((item, i, arr) => arr.indexOf(item) === i);
+    return array.filter((item, index) => array.indexOf(item) === index);
 }
 
 console.log(unique(array));
