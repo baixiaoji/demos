@@ -3,13 +3,13 @@ function debounce(fn, wait, immediate) {
 
     return function(...args) {
         if (timer) clearTimeout(timer);
-        const lock = false;
+        let lock = false;
         if (immediate) {
-            
+
             timer = setTimeout(()=>{
-                lock = false;    
+                lock = false;
             }, wait);
-            
+
             if (!lock) {
                 lock = true;
                 return fn.apply(this, args);
@@ -19,6 +19,6 @@ function debounce(fn, wait, immediate) {
                 fn.apply(this, args);
             }, wait)
         }
-        
+
     }
 }
