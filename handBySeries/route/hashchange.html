@@ -11,6 +11,7 @@
             <a href="#/profile">profile</a>
             <a href="#/about">about</a>
             <a href="#/no">no</a>
+            <a href="#/error">error</a>
         </li>
     </ul>
     <section id="content"></section>
@@ -29,6 +30,9 @@
     Router.prototype.registerNotFound = function(callback) {
         this.routeList['notFound'] = callback;
     };
+    Router.prototype.registerErrorHandler = function(callback) {
+      this.routeList['error'] = callback;
+    };
     Router.prototype.load = function() {
         const hash = window.location.hash.slice(1);
         let cb  = null;
@@ -39,7 +43,14 @@
         } else {
             cb = this.routeList[hash];
         }
-        cb.call(this);
+        try {
+          cb && cb.call(this);
+        }catch (e) {
+          const {error} = this.routeList;
+          
+          error && error.call(this, e);
+        }
+        
     }
     const router = new Router();
 
@@ -49,6 +60,9 @@
     router.registerNotFound(() => {
         content.innerText = 'no current page';
     });
+    router.registerErrorHandler((e)=> {
+      content.innerText = `page have an error \n ${e}`;
+    })
     router.register('/profile', () => {
         content.innerText = 'This is the profile page';
     })
@@ -56,7 +70,9 @@
     router.register('/about', () => {
         content.innerText = 'This is the about page';
     });
-
+    router.register('/error', () => {
+      throw Error('deliberate error');
+    });
     router.load();
 </script>
 </html>
