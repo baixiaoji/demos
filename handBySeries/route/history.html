@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>History implement</title>
 </head>
 <body>
-$END$
+  <ul>
+    <li>
+      <a href="/profile">profile</a>
+      <a href="/about">about</a>
+      <a href="/no">no</a>
+      <a href="/error">error</a>
+    </li>
+  </ul>
+  <section id="content"></section>
 </body>
+<script>
+  class HistoryRouter {
+    constructor() {
+      this.routeList = {};
+      this.initEvent();
+    }
+    initEvent() {
+      window.addEventListener('popstate', (e) => {
+        const state = e.state || {};
+        const path = typeof state.path === 'undefined' ? '/' : state.path;
+        this.load(path);
+      })
+      
+      window.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.tagName.toLowerCase() === 'a' || typeof target.getAttribute('href')) {
+          this.assign(target.getAttribute('href'));
+          e.preventDefault();
+        }
+      })
+    }
+    register(path, callback) {
+      this.routeList[path] = callback;
+    }
+    registerIndex(callback) {
+      this.routeList['/'] = callback;
+    }
+    registerNotFound(callback) {
+      this.routeList['notFound'] = callback;
+    }
+    registerError(callback) {
+      this.routeList['error'] = callback;
+    }
+    assign(path) {
+      history.pushState({path}, null, path);
+      this.load(path);
+    }
+    load(path) {
+      if (path === '/history.html') {
+        this.routeList['/'] && this.routeList['/']();
+      } else if (!this.routeList.hasOwnProperty(path)) {
+        this.routeList.notFound();
+      } else {
+        try {
+          this.routeList[path] && this.routeList[path].call(this);
+        } catch (e) {
+          console.log(e);
+          this.routeList.error && this.routeList.error.call(this, e);
+        }
+        
+      }
+    }
+  }
+  
+  const router = new HistoryRouter();
+  
+  router.registerIndex(() => {
+    content.innerText = 'this is index page';
+  })
+
+  router.registerNotFound(() => {
+    content.innerText = 'this is page not found';
+  })
+  router.registerError(() => {
+    content.innerText = 'callback run error';
+  })
+  
+  router.register('/profile', () => {
+    content.innerText = 'this is profile page';
+  })
+  router.register('/error', () => {
+    throw Error('this is deliberate error');
+  })
+  
+  router.load('/');
+</script>
 </html>
