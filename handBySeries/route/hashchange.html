@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>route of hash</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <a href="#/profile">profile</a>
+            <a href="#/about">about</a>
+            <a href="#/no">no</a>
+        </li>
+    </ul>
+    <section id="content"></section>
+</body>
+<script>
+    function Router() {
+        this.routeList = {};
+        window.addEventListener('hashchange', this.load.bind(this));
+    }
+    Router.prototype.register = function(path, callback) {
+        this.routeList[path] = callback;
+    };
+    Router.prototype.registerIndex = function(callback) {
+        this.routeList['index'] = callback;
+    };
+    Router.prototype.registerNotFound = function(callback) {
+        this.routeList['notFound'] = callback;
+    };
+    Router.prototype.load = function() {
+        const hash = window.location.hash.slice(1);
+        let cb  = null;
+        if (!hash) {
+            cb = this.routeList.index;
+        } else if (!this.routeList.hasOwnProperty(hash)) {
+            cb = this.routeList.notFound || function() {};
+        } else {
+            cb = this.routeList[hash];
+        }
+        cb.call(this);
+    }
+    const router = new Router();
+
+    router.registerIndex(() => {
+        content.innerText = 'This is the index page';
+    });
+    router.registerNotFound(() => {
+        content.innerText = 'no current page';
+    });
+    router.register('/profile', () => {
+        content.innerText = 'This is the profile page';
+    })
+
+    router.register('/about', () => {
+        content.innerText = 'This is the about page';
+    });
+
+    router.load();
+</script>
+</html>
