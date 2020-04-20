@@ -1,0 +1,1 @@
+const code = function codeTestName(params) {}
