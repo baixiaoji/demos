@@ -33,5 +33,14 @@ describe('Testing bind function', function() {
     const obj = new boundFn();
 
     expect(obj).toBeInstanceOf(fn);
+    /**
+     *
+     * function a() {
+       }
+       var boundA = a.bind(null);
+       var obj = new boundA()
+       obj.__proto__ === a.prototype // true
+     */
+    expect(obj.__proto__).toEqual(fn.prototype);
   });
 });
