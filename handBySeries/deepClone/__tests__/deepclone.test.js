@@ -105,4 +105,34 @@ describe('deepClone unit testing', function() {
 
     expect(copyOne.a).toBe('1');
   });
+
+  it('should copy right when pass the complex obj', function() {
+
+    const obj = {
+      string: '1',
+      number: 12,
+      bool: false,
+      date: new Date(),
+      // why did not having the function type?
+      // for expect convenient
+      // function() { return 1},
+      reg: /\d\w+/ig,
+      arr: [1,2,3],
+      nestObj: {
+        string: '1',
+        number: 12,
+        bool: false,
+        date: new Date(),
+        // function() { return 1},
+        reg: /\d\w+/ig,
+        arr: [1,2,3],
+      }
+    }
+    obj.self = obj;
+
+    const copyOne = deepClone(obj);
+    expect(copyOne).toEqual(obj);
+    expect(copyOne.self === obj).toBeFalsy();
+    expect(copyOne.self === copyOne).toBeTruthy();
+  });
 });
