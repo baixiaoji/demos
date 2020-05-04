@@ -90,4 +90,19 @@ describe('deepClone unit testing', function() {
     expect(copyOne).toEqual(example);
     expect(example !== copyOne).toBe(true);
   });
+
+  it('should copy the object when object has property to reference self', function() {
+    const obj = {
+      a: '1'
+    }
+    obj.self = obj;
+
+    const copyOne = deepClone(obj);
+
+    expect(copyOne).toEqual(obj);
+
+    expect(copyOne.self).toBe(copyOne);
+
+    expect(copyOne.a).toBe('1');
+  });
 });

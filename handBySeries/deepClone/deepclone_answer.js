@@ -1,6 +1,11 @@
+const cache = new WeakMap();
 export default function deepClone(target) {
   if (target instanceof Object) {
     let dist;
+    if (cache.has(target)) {
+      return cache.get(target);
+    }
+
     if (target instanceof Array) {
       dist = [];
     } else if (target instanceof Function) {
@@ -14,6 +19,8 @@ export default function deepClone(target) {
     }else {
       dist = {}
     }
+    cache.set(target, dist);
+
     for (let key in target) {
       if (target.hasOwnProperty(key)) {
         dist[key] = deepClone(target[key]);
