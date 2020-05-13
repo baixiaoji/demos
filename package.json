@@ -19,6 +19,7 @@
   "homepage": "https://github.com/baixiaoji/demos#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
     "babel-jest": "^25.4.0",
     "jest": "^25.4.0",
