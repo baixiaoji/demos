@@ -21,6 +21,19 @@ function tree2Arr(root, arr = []) {
     return arr;
 }
 
+function tree2array(node) {
+  if (!node) return [];
+  const q = [node];
+  const ret = [];
+  while (q.length) {
+    const t = q.shift();
+    ret.push(t.val);
+    if (t.left) q.push(t.left);
+    if (t.right) q.push(t.right);
+  }
+  return ret;
+}
+
 const root = array2Tree([1,2,3,4,5,7])
 console.log(root);
 console.log('------------------');
@@ -55,7 +68,7 @@ function midOrderReverse(root, fn) {
         } else {
             break;
         }
-    }   
+    }
 }
 
 
@@ -76,5 +89,5 @@ function preOrderReverse(root, fn) {
         } else {
             break;
         }
-    }   
+    }
 }
