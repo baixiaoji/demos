@@ -3,7 +3,7 @@ if (typeof Promise.all === 'undefined') {
 
         return new Promise((resolve, reject) => {
             if (!Array.isArray(promiseArray)) {
-                throw new TypeError('params need an array');
+                return reject(new TypeError('params need an array'));
             }
     
             let count = 0;
