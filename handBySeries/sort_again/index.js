@@ -67,4 +67,23 @@ function merge(left, right) {
   return result;
 }
 
+
+function _merge(arr, middle) {
+  let i = 0;
+  let j = middle;
+
+  while (i < middle && j < arr.length) {
+    let w = 0;
+
+    while(arr[i] < arr[j] && i < middle) { i++ }
+    while(arr[i] < arr[j] && j <arr.length) {w++; j++}
+
+    const part = arr.splice(j - w, j);
+
+    arr.splice(i, 0, ...part);
+
+    i += w;
+    j += w;
+  }
+}
 module.exports = { bubbleSort, selectionSort, mergeSort, merge };
