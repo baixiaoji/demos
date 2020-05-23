@@ -36,7 +36,7 @@ class Events {
 
   once(eventName, callback) {
     const wrapper = () => {
-      this.remove(eventName, callback);
+      this.remove(eventName, wrapper);
       callback();
     }
 
