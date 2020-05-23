@@ -29,6 +29,19 @@ class Events {
   off(eventName) {
     delete this.events[eventName];
   }
+
+  remove(eventName, callback) {
+    this.events[eventName].filter(cb => cb !== callback);
+  }
+
+  once(eventName, callback) {
+    const wrapper = () => {
+      this.remove(eventName, callback);
+      callback();
+    }
+
+    this.on(eventName, wrapper);
+  }
 }
 
 module.exports = Events;
