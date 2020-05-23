@@ -12,7 +12,7 @@
 // Answer: [1, 3, 2]
 
 function levelWidth(root) {
-    // 增加一个结束mark标记当前层级   核心用到了 广度优先遍历
+    // 增加一个结束mark标记当前层级   核心用到了宽度优先遍历
     const arr = [root,'end'];
     const count = [];
     let index = 0
@@ -35,4 +35,29 @@ function levelWidth(root) {
     return count;
 }
 
-module.exports = levelWidth;
+module.exports = _levelWidth;
+
+
+
+function _levelWidth(root) {
+    // 增加一个结束mark标记当前层级   核心用到了宽度优先遍历
+    const arr = [root,'end'];
+    const count = [0];
+
+    while(arr.length > 1) {
+        
+        const first = arr.shift();
+
+        if (first === 'end') {
+            // 'end' tag push last arr
+            arr.push(first);
+            count.push(0);
+            continue;
+        }
+        
+        count[count.length - 1] += 1;
+        arr.push(...first.children);
+    }
+
+    return count;
+}
