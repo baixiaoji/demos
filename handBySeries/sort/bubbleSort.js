@@ -8,10 +8,10 @@ function bubbleSort(arr) {
         // 每一次二层循环已经确定最后一位是最大的；
         for(let j = 0; j< length - i - 1; j++) {
             if (arr[j] > arr[j +1]) {
-                change = false;
+                // change = false;
                 // swap 函数简写
                 [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-            } 
+            }
         }
         // if(change) break;
     }
