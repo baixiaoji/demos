@@ -13,7 +13,7 @@ function add(a ,b){
        f = Math.floor(t / 10);
        sum = t%10 + sum;
     }
-    if(f == 1){
+    if(f === 1){
        sum = "1" + sum;
     }
     return sum;
@@ -30,3 +30,30 @@ function add(a ,b){
 
     return (a*baseValue + b * baseValue) / baseValue;
  }
+
+var multiply = function(num1, num2) {
+  if (num1 === '0' || num2 === '0') return '0';
+
+  const resultArr = new Array(num2.length + num1.length).fill(0);
+
+  const shortNum = num1.length > num2.length ? num2 : num1;
+  const longNum = num1.length > num2.length ? num1 : num2;
+
+
+  let pos = resultArr.length - 1;
+
+  for (let i = shortNum.length - 1; i >=0; i--) {
+    let tempPos = pos;
+    for (let j = longNum.length - 1; j >= 0; j--) {
+      resultArr[tempPos] += shortNum[i] * longNum[j];
+      resultArr[tempPos - 1] += Math.floor(resultArr[tempPos] / 10);
+
+      resultArr[tempPos] = resultArr[tempPos] % 10;
+
+      tempPos--;
+    }
+    pos--;
+  }
+
+  return resultArr.join('').replace(/^0+/, '');
+};
